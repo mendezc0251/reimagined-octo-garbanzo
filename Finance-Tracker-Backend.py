@@ -1,4 +1,5 @@
 import csv
+import pandas as pd
 
 # with open('Finance-Data.csv', 'w', newline='') as csvfile:
 #     fieldnames = ['Income', 'Expense', 'Amount']
@@ -12,6 +13,7 @@ def add_expense(name, amount):
         writer = csv.DictWriter(csvfile, fieldnames)
         writer.writerow({'Income': 'N/A', 'Expense': name, 'Amount': amount})
 def remove_expense(name, amount):
+    data = pd.read_csv('Finance-Data.csv')
     return 0
 def add_income():
     return 0
