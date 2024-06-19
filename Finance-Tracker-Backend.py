@@ -1,3 +1,7 @@
+"""
+Class that will take care of the backend of the finance tracker.
+"""
+
 import csv
 import pandas as pd
 
