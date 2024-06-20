@@ -5,22 +5,22 @@ Class that will take care of the backend of the finance tracker.
 import csv
 import pandas as pd
 
-# with open('Finance-Data.csv', 'w', newline='') as csvfile:
-#     fieldnames = ['Income', 'Expense', 'Amount']
-#     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+colnames = ['ID','Income','Expense','Amount']
+df = pd.read_csv('Finance-Data.csv', names=colnames, header=None, index_col='ID')
 
-#     writer.writeheader()
-
-def add_expense(name, amount):
-    with open('Finance-Data.csv', 'a', newline='') as csvfile:
-        fieldnames = ['Income', 'Expense', 'Amount']
-        writer = csv.DictWriter(csvfile, fieldnames)
-        writer.writerow({'Income': 'N/A', 'Expense': name, 'Amount': amount})
-def remove_expense(name, amount):
-    data = pd.read_csv('Finance-Data.csv')
+def add_expense(id, expense, amount):
+    data = {
+        'ID': id,
+        'Income': 'N/A',
+        'Expense': expense,
+        'Amount': amount
+    }
+    df = pd.DataFrame(data)
+    df.to_csv('Finance-Data.csv', mode='a') 
+def remove_expense():
     return 0
 def add_income():
     return 0
 def remove_income():
     return 0
-add_expense("Test Expense", 10.00)
+add_expense('01','Dining',10.00)
