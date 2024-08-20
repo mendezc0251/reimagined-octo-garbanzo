@@ -8,7 +8,7 @@ function WelcomeButton(){
 }
 export default function MyApp(){
     return(
-        <div>
+        <div class='styles.body'>
             <WelcomeButton/>
         </div>
     )
