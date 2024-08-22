@@ -2,7 +2,7 @@ import sys
 from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QTableView, QTableWidgetItem, QMenuBar, QMenu
 from PySide6.QtGui import QAction
 from PySide6.QtCore import Qt
-from PySide6 import QtSqlite
+from PySide6 import QtSql
 from Backend import FinanceTracker as FT
 import sqlite3
 
@@ -44,10 +44,16 @@ class FinanceTracker(QMainWindow):
     def delete_transaction(self):
         pass
     def loadData(self):
-        db = QtSqlite.QSqlDatabase.addDatabase('Finances.db')
-        db.open()
+        db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
+        db.setDatabaseName('Finances.db')
+        if not db.open():
+            print('Failed to open the database.')
+            return
         model = QtSql.QSqlQueryModel()
-        model.setQuery("SELECT * FROM Expenses")
+        query = QtSql.QSqlQuery()
+        query.exec("SELECT * FROM Expenses")
+        model.setQuery(query)
+
         self.transaction_table.setModel(model)
 
 
