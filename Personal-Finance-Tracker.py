@@ -1,7 +1,8 @@
 import sys
-from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QTableWidget, QTableWidgetItem, QMenuBar, QMenu
+from PySide6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QPushButton, QTableView, QTableWidgetItem, QMenuBar, QMenu
 from PySide6.QtGui import QAction
 from PySide6.QtCore import Qt
+from PySide6 import QtSqlite
 from Backend import FinanceTracker as FT
 import sqlite3
 
@@ -17,8 +18,7 @@ class FinanceTracker(QMainWindow):
         layout = QVBoxLayout(central_widget)
 
         # Table For Displaying Transactions
-        self.transaction_table = QTableWidget(0,4)
-        self.transaction_table.setHorizontalHeaderLabels(["Expense/Income", "Amount"])
+        self.transaction_table = QTableView()
         self.transaction_table.horizontalHeader().setStretchLastSection(True)
         layout.addWidget(self.transaction_table)
         self.loadData()
@@ -44,10 +44,13 @@ class FinanceTracker(QMainWindow):
     def delete_transaction(self):
         pass
     def loadData(self):
-        conn = sqlite3.connector.connect('Finances.db')
-        cursor = conn.cursor()
+        db = QtSqlite.QSqlDatabase.addDatabase('Finances.db')
+        db.open()
+        model = QtSql.QSqlQueryModel()
+        model.setQuery("SELECT * FROM Expenses")
+        self.transaction_table.setModel(model)
 
-        cursor.execute('SELECT * FROM Expenses')
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
