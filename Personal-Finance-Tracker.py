@@ -43,12 +43,15 @@ class FinanceTracker(QMainWindow):
         pass
     def delete_transaction(self):
         pass
+    # Function to Load Data from SQLite Database
     def loadData(self):
+        # Initialize Connection to SQLite Database
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName('Finances.db')
         if not db.open():
             print('Failed to open the database.')
             return
+        # Create Model and Query
         model = QtSql.QSqlQueryModel()
         query = QtSql.QSqlQuery()
         query.exec("SELECT * FROM Expenses")
