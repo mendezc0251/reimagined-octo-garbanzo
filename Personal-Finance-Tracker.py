@@ -63,9 +63,11 @@ class FinanceTracker(QMainWindow):
 
 # Main function handles initialization of the Main Window
 if __name__ == '__main__':
+    FT.__init__(FT)
+    FT.add_expense(FT, 1, "Haircut", 10)
     app = QApplication(sys.argv)
     
     window = FinanceTracker()
     window.show()
     
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

@@ -10,7 +10,15 @@ class FinanceTracker:
     def __init__(self):
         self.mydb = sqlite3.connect('Finances.db')
         self.cursor = self.mydb.cursor()
-        print('Database initialized')
+        self.cursor.execute("DROP TABLE IF EXISTS Expenses")
+        table = """ CREATE TABLE Expenses (
+                    id INT NOT NULL,
+                    expense VARCHAR(255),
+                    amount NUMERIC NOT NULL
+                );"""
+        self.cursor.execute(table)
+        print("Table ready!")
+        print('Database initialized!')
     # This function adds an expense to the Finances databases Expenses Table
     def add_expense(self, id, expense, amount):
         self.cursor.execute('INSERT INTO Expenses VALUES(?, ?, ?)',(id,expense,amount))
