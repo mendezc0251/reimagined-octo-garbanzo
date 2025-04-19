@@ -6,6 +6,7 @@ from PySide6 import QtSql
 from Backend import FinanceTracker as FT
 import sqlite3
 
+# Main window class that contains all of the Finance Trackers interactive UI functionality
 class FinanceTracker(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -60,7 +61,7 @@ class FinanceTracker(QMainWindow):
         self.transaction_table.setModel(model)
 
 
-
+# Main function handles initialization of the Main Window
 if __name__ == '__main__':
     app = QApplication(sys.argv)
     
